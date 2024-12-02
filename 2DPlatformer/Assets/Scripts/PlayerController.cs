@@ -18,6 +18,15 @@ public Slider healthSlider;
 public int  maxHealth;
 public int currentHealth;
 
+[Header("Ammo")]
+public Slider ammoSlider;
+public int  maxAmmo;
+public int currentAmmo;
+
+
+[Header("Doors & Keys")]
+public bool GotKey;
+
 [Header("Shooting")]
 public Transform shootingPoint;
 public GameObject bullet;
@@ -43,7 +52,9 @@ bool isFacingRight;
         startPos = transform.position;
 
         currentHealth=maxHealth;
+        currentAmmo=maxAmmo;
         isFacingRight = true;
+        GotKey = false;
     }
 
     // Update is called once per frame
@@ -54,6 +65,7 @@ bool isFacingRight;
         
         Movement();
         Health();
+        Ammo();
         Shoot();
         MovementDirection();
     }
@@ -84,11 +96,18 @@ void Health()
     }
 }
 
+void Ammo()
+{
+    ammoSlider.value = currentAmmo;
+
+}
+
 void Shoot()
 {
-    if (Input.GetKeyDown(KeyCode.X))
+    if (Input.GetKeyDown(KeyCode.X) && currentAmmo > 0)
     {
         Instantiate(bullet, shootingPoint.position, shootingPoint.rotation);
+        currentAmmo--;
     }
 }
 
@@ -115,14 +134,22 @@ transform.Rotate(0f, 180f, 0f);
         {
             transform.position = startPos;
         }
-        if (other.gameObject.CompareTag("Exit"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        
          if (other.gameObject.CompareTag("Enemy"))
         {
             currentHealth--;
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Exit") && GotKey == true )
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if (other.gameObject.CompareTag("Key"))
+        {
+             GotKey = true;
+             Destroy(other.gameObject);
         }
     }
 }
