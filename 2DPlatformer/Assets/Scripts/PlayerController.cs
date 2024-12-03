@@ -104,7 +104,7 @@ void Ammo()
 
 void Shoot()
 {
-    if (Input.GetKeyDown(KeyCode.X) && currentAmmo > 0)
+    if (Input.GetKeyDown(KeyCode.S) && currentAmmo > 0)
     {
         Instantiate(bullet, shootingPoint.position, shootingPoint.rotation);
         currentAmmo--;
@@ -149,6 +149,16 @@ transform.Rotate(0f, 180f, 0f);
         if (other.gameObject.CompareTag("Key"))
         {
              GotKey = true;
+             Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("AmmoRelode"))
+        {
+            currentAmmo++;
+             Destroy(other.gameObject);
+        }
+         if (other.gameObject.CompareTag("HealthPack"))
+        {
+            currentHealth++;
              Destroy(other.gameObject);
         }
     }

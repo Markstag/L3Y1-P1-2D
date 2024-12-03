@@ -8,6 +8,7 @@ TagManager:
   - Hazard
   - Enemy
   - Key
+  - AmmoRelode
   layers:
   - Default
   - TransparentFX
