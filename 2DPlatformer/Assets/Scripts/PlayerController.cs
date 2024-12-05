@@ -68,6 +68,7 @@ bool isFacingRight;
         Ammo();
         Shoot();
         MovementDirection();
+        UpdateAnimations();
     }
 
     void Movement()
@@ -127,6 +128,22 @@ void Flip()
 {
 isFacingRight = !isFacingRight;
 transform.Rotate(0f, 180f, 0f);
+}
+
+void UpdateAnimations()
+{
+    Animator anim = transform.GetChild(0).transform.GetComponent<Animator>();
+
+    anim.SetBool("isGrounded", hit.collider);
+
+    if(inputs != 0)
+    {
+        anim.SetBool("isMoving", true);
+    }
+    else
+    {
+        anim.SetBool("isMoving", false);
+    }
 }
     private void OnTriggerEnter2D(Collider2D other) 
     {
