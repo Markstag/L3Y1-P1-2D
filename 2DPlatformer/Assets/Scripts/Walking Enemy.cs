@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class WalkingEnemy : MonoBehaviour
 {   
+    [Header("Enemy")]
      public int damage;
     public float movespeed;
     public float distance;
     Transform target;
+     
+
     // Start is called before the first frame update
     void Start()
     {

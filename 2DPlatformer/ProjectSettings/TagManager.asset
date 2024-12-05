@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Key
   - AmmoRelode
+  - HealthPack
+  - Destructible
   layers:
   - Default
   - TransparentFX
