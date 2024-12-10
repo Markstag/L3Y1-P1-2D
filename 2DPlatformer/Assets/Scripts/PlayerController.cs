@@ -118,7 +118,7 @@ if (isFacingRight && inputs < -.1f)
 {
     Flip();
 }
-else if (!isFacingRight && inputs < .1f)
+else if (!isFacingRight && inputs > .1f)
 {
      Flip();
 }
@@ -136,7 +136,7 @@ void UpdateAnimations()
 
     anim.SetBool("isGrounded", hit.collider);
 
-    if(inputs != 0)
+     if(inputs != 0)
     {
         anim.SetBool("isMoving", true);
     }
@@ -144,6 +144,12 @@ void UpdateAnimations()
     {
         anim.SetBool("isMoving", false);
     }
+
+    if (Input.GetKeyDown(KeyCode.S) && currentAmmo > 0)
+    {
+        anim.SetTrigger("Shoot");
+    }
+
 }
     private void OnTriggerEnter2D(Collider2D other) 
     {
